@@ -1,0 +1,149 @@
+:root {
+  --situation-background: #eeeeee;
+  --player-color: palevioletred;
+  --playing-color: palevioletred;
+  --choice-background: rgba(216, 112, 147, 0.2);
+  --tag-color: black;
+  --mono-font: 'Sarasa Mono TC', Courier, monospace;
+  --border-radius: 5px;
+}
+
+.player {
+  color: var(--player-color);
+}
+
+.outline {
+  margin-left: 0;
+}
+
+.situation {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+  padding-top: 0.2ex;
+  padding-bottom: 0.2ex;
+  background: var(--situation-background);
+  box-shadow: -1em 0px 0px 0px var(--situation-background), 1em 0px 0px 0px var(--situation-background);
+  border-radius: inherit;
+}
+
+.choice-list {
+  margin-top: 2ex;
+  margin-bottom: 1ex;
+  padding-top: 1ex;
+  padding-bottom: 1ex;
+  background-color: var(--choice-background);
+  box-shadow: -1em 0px 0px 0px var(--choice-background), 1em 0px 0px 0px var(--choice-background);
+  border-radius: inherit;
+}
+
+.print {
+  margin-top: 2ex;
+}
+
+.print-name {
+  color: #797979;
+}
+
+.wait::before {
+  content: '/';
+}
+
+.wait::after {
+  content: '/';
+}
+
+.wait {
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+  opacity: 0.6;
+  font-family: var(--mono-font);
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.choice-list::before {
+  content: "選擇";
+  opacity: 0.8;
+}
+
+.choice-tag {
+  margin-right: 0.3em;
+  font-family: var(--mono-font);
+}
+
+.tag::before {
+  content: "選項";
+  margin-right: 0.25em;
+}
+
+.tag {
+  font-family: var(--mono-font);
+  margin-top: 2ex;
+  font-weight: bolder;
+  color: var(--tag-color);
+}
+
+.tag::before {
+  content: "標籤";
+  margin-right: 0.25em;
+}
+
+.goto::before {
+  content: "跳轉";
+  margin-right: 0.25em;
+}
+
+.goto {
+  font-family: var(--mono-font);
+  color: var(--tag-color);
+}
+
+.goto::after {
+  content: "";
+}
+
+.App {
+  border-radius: var(--border-radius);
+}
+
+.bg, .movie {
+  font-family: var(--mono-font);
+  max-width: 100%;
+  margin-top: 2ex;
+}
+
+.bg::before {
+  content: "Background: ";
+}
+
+.notfound {
+  background-color: pink;
+}
+
+.face {
+  float: left;
+  width: 40px;
+  margin-left: -55px;
+  margin-top: 5px;
+  border-radius: var(--border-radius);
+  border-style: var(--player-color);
+}
+
+.playing .print-name::after {
+  margin-left: 0.5em;
+  content: "▶";
+}
+
+.bgm audio {
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 1em;
+}
+
+.bgm {
+  height: 30px;
+  margin-top: 2ex;
+  font-family: var(--mono-font);
+}
