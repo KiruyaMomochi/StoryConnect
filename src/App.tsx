@@ -18,6 +18,7 @@ type CommandList = Command[]
 // TODO: We can also use another way
 // That is, add a tmp var, add to it first, then submit
 function Story(props: { commandList: CommandList }) {
+
   let face: string | undefined = undefined
   let voice: string | undefined = undefined
   let textSize: number | undefined = undefined
@@ -121,7 +122,9 @@ function Story(props: { commandList: CommandList }) {
     }
   }, [] as Array<JSX.Element | undefined>)
 
-  return <React.Fragment>{nodes}</React.Fragment>
+  const node = <div>{nodes}</div>
+
+  return node
 }
 
 class StoryViewer extends React.Component<{}, { commandList: CommandList }> {
@@ -341,11 +344,18 @@ class Print extends React.Component<PrintProp, { play: boolean }, {}>
   audio?: HTMLAudioElement
 
   componentDidMount() {
-    if (this.props.voice != null) {
+    if (this.audio == null && this.props.voice != null) {
       const audioSource = `https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.flac`
-      if (this.audio?.src != audioSource) {
-        this.audio = new Audio(audioSource)
-      }
+      this.audio = new Audio(audioSource)
+      this.audio.addEventListener('ended', () => this.setState({ play: false }))
+    }
+  }
+
+  componentDidUpdate(prevProps: PrintProp) {
+    if (this.props.voice != null && this.props.voice !== prevProps.children) {
+      const audioSource = `https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.flac`
+      this.audio?.removeEventListener('ended', () => this.setState({ play: false }))
+      this.audio = new Audio(audioSource)
       this.audio.addEventListener('ended', () => this.setState({ play: false }))
     }
   }
