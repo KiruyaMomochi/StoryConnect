@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+// import initSqlJs from 'sql.js'
 
 function Player() {
   return <span className="player" >佑樹</span>;
@@ -140,6 +141,7 @@ class StoryViewer extends React.Component<{}, { commandList: CommandList }> {
   //   const buffer = new Uint8Array(await data.arrayBuffer())
   //   const sqljs = await initSqlJs(config);
   //   const db = new sqljs.Database(buffer)
+  //   console.log(db)
   // }
 
   onFileChange: React.FormEventHandler<HTMLInputElement> = (e: React.ChangeEvent<HTMLInputElement>) => {
