@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import initSqlJs from 'sql.js';
 
 function Player() {
   return <span className="player" >佑樹</span>;
@@ -121,6 +120,7 @@ function Story(props: { commandList: CommandList }) {
         return prev;
     }
   }, [] as Array<JSX.Element | undefined>)
+
   return <React.Fragment>{nodes}</React.Fragment>
 }
 
@@ -128,6 +128,16 @@ class StoryViewer extends React.Component<{}, { commandList: CommandList }> {
   state = {
     commandList: [] as CommandList
   }
+
+  // async componentDidMount() {
+  //   const config: Partial<EmscriptenModule> = {
+  //     locateFile: file => `https://sql.js.org/dist/${file}`
+  //   }
+  //   const data = await fetch('https://ptt.moe/Assets/assets/_elementsresources/resources/masterdata/master.bytes')
+  //   const buffer = new Uint8Array(await data.arrayBuffer())
+  //   const sqljs = await initSqlJs(config);
+  //   const db = new sqljs.Database(buffer)
+  // }
 
   onFileChange: React.FormEventHandler<HTMLInputElement> = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -331,8 +341,11 @@ class Print extends React.Component<PrintProp, { play: boolean }, {}>
   audio?: HTMLAudioElement
 
   componentDidMount() {
-    if (this.audio == null && this.props.voice != null) {
-      this.audio = new Audio(`https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.flac`)
+    if (this.props.voice != null) {
+      const audioSource = `https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.flac`
+      if (this.audio?.src != audioSource) {
+        this.audio = new Audio(audioSource)
+      }
       this.audio.addEventListener('ended', () => this.setState({ play: false }))
     }
   }
