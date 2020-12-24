@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-// import initSqlJs from 'sql.js'
+// import { SqlJs } from 'sql.js/module';
+// import SqlWorker from './sqlite-worker'
 
 function Player() {
   return <span className="player" >佑樹</span>;
@@ -133,16 +134,32 @@ class StoryViewer extends React.Component<{}, { commandList: CommandList }> {
     commandList: [] as CommandList
   }
 
-  // async componentDidMount() {
-  //   const config: Partial<EmscriptenModule> = {
-  //     locateFile: file => `https://sql.js.org/dist/${file}`
-  //   }
-  //   const data = await fetch('https://ptt.moe/Assets/assets/_elementsresources/resources/masterdata/master.bytes')
-  //   const buffer = new Uint8Array(await data.arrayBuffer())
-  //   const sqljs = await initSqlJs(config);
-  //   const db = new sqljs.Database(buffer)
-  //   console.log(db)
-  // }
+  async componentDidMount() {
+    // const data = await fetch('https://ptt.moe/Assets/assets/_elementsresources/resources/masterdata/master.bytes')
+    // const buffer = await data.arrayBuffer();
+
+    // const worker = new SqlWorker();
+    // worker.onmessage = () => {
+    //   console.log("Database opened!")
+
+    //   worker.onmessage = (event: MessageEvent<SqlJs.QueryResults[]>) => {
+    //     console.log(event.data[0])
+    //   }
+
+    //   worker.postMessage({
+    //     action: 'exec',
+    //     command: 'SELECT story_id, story_group_id, title FROM story_detail'
+    //   })
+    // }
+
+    // worker.onerror = e => console.log("Worker error: ", e);
+
+    // worker.postMessage({
+    //   id: 1,
+    //   action: 'open',
+    //   buffer: buffer
+    // })
+  }
 
   onFileChange: React.FormEventHandler<HTMLInputElement> = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -188,7 +205,8 @@ class StoryViewer extends React.Component<{}, { commandList: CommandList }> {
     return (
       <>
         <input type="file" onChange={this.onFileChange} />
-        <input type="text" onKeyDown={this.onTextSubmit} autoComplete="on" />
+        <input type="text" onKeyDown={this.onTextSubmit} />
+        {/* <AutoComplete  /> */}
         <Story commandList={this.state.commandList} />
       </>
     )
@@ -354,7 +372,7 @@ class Print extends React.Component<PrintProp, { play: boolean }, {}>
   }
 
   componentDidUpdate(prevProps: PrintProp) {
-    if (this.props.voice != null && this.props.voice !== prevProps.children) {
+    if (this.props.voice != null && this.props.voice !== prevProps.voice) {
       const audioSource = `https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.flac`
       this.audio?.removeEventListener('ended', () => this.setState({ play: false }))
       this.audio = new Audio(audioSource)

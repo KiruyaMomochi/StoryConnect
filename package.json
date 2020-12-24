@@ -1,6 +1,6 @@
 {
   "name": "story-connect",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -42,5 +42,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "/story"
+  "homepage": "/story",
+  "devDependencies": {
+    "worker-loader": "^3.0.6"
+  }
 }
