@@ -17,6 +17,12 @@ interface Command {
 }
 type CommandList = Command[]
 
+// function StoryRedive (props: {commandList: CommandList}) {
+//   let window: string | undefined = undefined
+
+//   props.commandList.
+// }
+
 // TODO: We can also use another way
 // That is, add a tmp var, add to it first, then submit
 function Story(props: { commandList: CommandList }) {
@@ -321,15 +327,15 @@ function Background(prop: BackgroundProp) {
 
 function Movie(prop: MovieProp) {
   return <video className="movie" controls preload="metadata" >
-    <source src={`https://ptt.moe/Movies/t/story_${prop.file}/story_${prop.file}.mp4`} type="video/mp4" />
-    <track label="Chinese" kind="subtitles" srcLang="zh-Hant" src={`https://ptt.moe/Subtitles/storydata_movie_${prop.file}.vtt`} default />
+    <source src={`https://ptt.ptt.moe:4343/Movies/t/story_${prop.file}/story_${prop.file}.mp4`} type="video/mp4" />
+    <track label="Chinese" kind="subtitles" srcLang="zh-Hant" src={`https://cdn.jsdelivr.net/gh/KiruyaMomochi/RediveData/subtitle/movie_${prop.file}.vtt`} default />
   </video>
 }
 
 function MovieStay(prop: MovieProp) {
   return <video className="movie" controls preload="metadata" >
-    <source src={`https://ptt.moe/Movies/t/story_${prop.file}/story_${prop.file}.mp4`} type="video/mp4" />
-    <track label="Chinese" kind="subtitles" srcLang="zh-Hant" src={`https://ptt.moe/Subtitles/storydata_movie_${prop.file}.vtt`} default />
+    <source src={`https://ptt.ptt.moe:4343/Movies/t/story_${prop.file}/story_${prop.file}.mp4`} type="video/mp4" />
+    <track label="Chinese" kind="subtitles" srcLang="zh-Hant" src={`https://cdn.jsdelivr.net/gh/KiruyaMomochi/RediveData/subtitle/movie_${prop.file}.vtt`} default />
   </video>
 }
 
@@ -339,7 +345,7 @@ function Bgm(prop: BgmProp) {
     // return <div className="bgm">Bgm stop.</div>
   }
   return <div className="bgm">
-    <audio src={`https://ptt.moe/Musics/${prop.file}/${prop.file}_000.flac`} controls />
+    <audio src={`https://ptt.moe/Bgm/${prop.file}/${prop.file}_000.m4a`} controls />
     {prop.file}
   </div>
 }
@@ -364,20 +370,20 @@ class Print extends React.Component<PrintProp, { play: boolean }, {}>
   audio?: HTMLAudioElement
 
   componentDidMount() {
-    if (this.audio == null && this.props.voice != null) {
-      const audioSource = `https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.flac`
-      this.audio = new Audio(audioSource)
-      this.audio.addEventListener('ended', () => this.setState({ play: false }))
-    }
+    // if (this.audio == null && this.props.voice != null) {
+    //   const audioSource = `https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.m4a`
+    //   this.audio = new Audio(audioSource)
+    //   this.audio.addEventListener('ended', () => this.setState({ play: false }))
+    // }
   }
 
   componentDidUpdate(prevProps: PrintProp) {
-    if (this.props.voice != null && this.props.voice !== prevProps.voice) {
-      const audioSource = `https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.flac`
-      this.audio?.removeEventListener('ended', () => this.setState({ play: false }))
-      this.audio = new Audio(audioSource)
-      this.audio.addEventListener('ended', () => this.setState({ play: false }))
-    }
+    // if (this.props.voice != null && this.props.voice !== prevProps.voice) {
+    //   const audioSource = `https://ptt.moe/Voices/t/${this.props.voice.slice(0, -4)}/${this.props.voice}.m4a`
+    //   this.audio?.removeEventListener('ended', () => this.setState({ play: false }))
+    //   this.audio = new Audio(audioSource)
+    //   this.audio.addEventListener('ended', () => this.setState({ play: false }))
+    // }
   }
 
   componentWillUnmount() {
