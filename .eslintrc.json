@@ -4,9 +4,9 @@
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended"
+        // "airbnb"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -21,5 +21,18 @@
         "@typescript-eslint"
     ],
     "rules": {
-    }
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": [
+            "error"
+        ],
+        "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
+        "semi": ["error", "always"],
+        "quotes": ["error", "single"]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "ignorePatterns": ["src/spine/**/*.ts"]
 }
